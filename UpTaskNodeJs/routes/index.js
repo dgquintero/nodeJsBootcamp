@@ -1,4 +1,5 @@
 const express = require('express');
+const { routerShape } = require('react-router');
 const router = express.Router();
 
 
@@ -8,9 +9,7 @@ const proyectosController = require('../controllers/proyectosController');
 module.exports = function(){
   // ruta para el home
   router.get('/', proyectosController.proyectosHome);
+  router.get('/nuevo-proyecto', proyectosController.formularioProyecto)
 
-  router.get('/nosotros', (re, res) => {
-    res.render('nosotros');
-  })
   return router;
 }
