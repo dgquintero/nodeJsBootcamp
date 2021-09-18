@@ -4,7 +4,9 @@
   "description": "Proyecto Uptask con node y MVC",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./index.js"
+    "dev": "nodemon ./index.js",
+    "start": "concurrently \"npm run dev \" \"npm run watch \"",
+    "watch": "webpack -w --mode development"
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,7 @@
   },
   "homepage": "https://github.com/dgquintero/nodeJsBootcamp#readme",
   "dependencies": {
+    "concurrently": "^6.2.1",
     "express": "^4.17.1",
     "express-validator": "^6.12.1",
     "mysql2": "^2.3.0",
@@ -26,6 +29,10 @@
     "slug": "^5.1.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
+    "babel-loader": "^8.2.2",
+    "nodemon": "^2.0.12",
+    "webpack": "^5.53.0"
   }
 }
