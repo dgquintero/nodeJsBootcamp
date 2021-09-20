@@ -25,22 +25,28 @@ if(btnEliminar){
         const url = `${location.origin}/proyectos/${urlProyecto}`
 
         
-        axios.delete(url, { params: urlProyecto})
+        axios.delete(url, { params: {urlProyecto}})
           .then(function(respuesta){
             console.log(respuesta)
+
+              Swal.fire(
+                'Borrado!',
+                respuesta.data,
+                'success'
+              );
+              
+              //redireccionar al inicio
+              setTimeout(() => {
+                window.location.href = '/'
+              }, 3000)
           })
-          return
-
-        Swal.fire(
-          'Borrado!',
-          'El proyecto fue borrado.',
-          'success'
-        );
-
-        //redireccionar al inicio
-        setTimeout(() => {
-          window.location.href = '/'
-        }, 3000)
+          .catch(() => {
+            Swal.fire({
+              type: 'error',
+              title: 'Hubo un error',
+              text: 'No se pudo eliminar el Proyecto'
+            })
+          })
       }
     })
   })
