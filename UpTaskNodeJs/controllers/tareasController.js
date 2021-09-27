@@ -14,7 +14,7 @@ exports.agregarTarea = async (req, res, next) => {
   const proyectoId = proyecto.id;
 
   // Insertar en la base de datos
-  Tareas.create({ tarea, estado, proyectoId})
+  const resultado = await Tareas.create({ tarea, estado, proyectoId})
 
   if(!resultado){
     return next();
@@ -22,4 +22,23 @@ exports.agregarTarea = async (req, res, next) => {
 
   // redireccionar
   res.redirect('/proyectos/${req.params.url }')
+}
+
+exports.cambiarEstadoTarea = async(req, res) => {
+  const { id } = req.params;
+  const tarea = await Tareas.findOne({ where: {id: id}})
+
+
+  // cambiar estado
+  let estado = 0;
+  if (tarea.estado === estado){
+    estado = 1;
+  }
+  tarea.estado = estado;
+  
+  const resultado = await tarea.save();
+  if (!resultado) return next();
+  res.status(200).send('Actualizado');
+
+  // res.send('todo va bien')
 }
