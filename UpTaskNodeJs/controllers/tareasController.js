@@ -21,7 +21,7 @@ exports.agregarTarea = async (req, res, next) => {
   }
 
   // redireccionar
-  res.redirect('/proyectos/${req.params.url }')
+  res.redirect(`/proyectos/${req.params.url }`)
 }
 
 exports.cambiarEstadoTarea = async(req, res) => {
