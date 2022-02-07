@@ -3,3 +3,7 @@ exports.formCrearCuenta = (req, res ) => {
     nombrePagina :  'Crear Cuenta en Uptask'
   })
 }
+
+exports.CrearCuenta = (req, res) =>{
+  res.send('Enviaste el form')
+}
