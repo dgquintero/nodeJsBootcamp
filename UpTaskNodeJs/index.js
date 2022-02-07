@@ -2,7 +2,7 @@ const express = require('express');
 const routes = require('./routes');
 const path = require('path');
 const bodyParser = require('body-parser')
-const expressValidator = require('express-validator');
+const flash = require('connect-flash')
 
 
 // helpers con algunas funciones
@@ -32,6 +32,9 @@ app.set('view engine', 'pug');
 
 //añadir las carpetas de las vistas
 app.set('views', path.join(__dirname, '/views'));
+
+// agregar flash messages
+app.use(flash());
 
 // PAsar vardump a la app
 app.use((req, res, next) => {
