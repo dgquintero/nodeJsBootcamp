@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const flash = require('connect-flash')
 const session= require('express-session')
 const cookieParser = require('cookie-parser')
+const passport = require('./config/passport')
 
 
 // helpers con algunas funciones
@@ -38,12 +39,16 @@ app.set('views', path.join(__dirname, '/views'));
 // agregar flash messages
 app.use(flash());
 
+app.use(cookieParser())
 // sesiones nos permiten navegar entre distintas paginas sin volvernos a autenticar
 app.use(session({
     secret: 'supersecreto',
     resave: false,
     saveUninitialized: false
 }))
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 // Pasar vardump a la app
 app.use((req, res, next) => {
