@@ -52,9 +52,10 @@ app.use(passport.session())
 
 // Pasar vardump a la app
 app.use((req, res, next) => {
-    res.locals.year = 2021;
     res.locals.vardump = helpers.vardump;
     res.locals.mensajes = req.flash()
+    res.locals.usuario = {...req.user} || null
+    // console.log(res.locals.usuario)
     next();
 });
 

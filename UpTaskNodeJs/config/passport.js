@@ -15,24 +15,20 @@ passport.use(
     },
     async(email, password, done) =>{
       try {
-        // console.log(email, password)
         const usuario = await Usuarios.findOne({
           where: {email: email}
         })
         // El usuario existe, password incorrecto
         if(!usuario.verificarPassword(password)){
-          console.log(email, password)
           return done(null, false, {
             message: 'Password Incorrecto'
           })
         }
         // El email existe, y el password correcto
-        console.log(email, password)
         return done(null, usuario)
 
       } catch (error) {
           // Ese usuario no existe
-          console.log(error)
           return done(null, false, {
             message: 'Esa cuenta no existe'
           })
