@@ -82,5 +82,10 @@ module.exports = function(){
   // cerrar sesión
   router.get('/cerrar-sesion', authController.cerrarSesion)
 
+  //Restablecer contraseña
+  router.get('/reestablecer', usuariosController.formReestablecerPassword)
+
   return router;
 }
+
+
