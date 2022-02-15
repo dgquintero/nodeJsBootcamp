@@ -105,3 +105,6 @@ dist
 
 # MAc file
 /.DS_Store
+
+# variables de entorno
+variables.env
