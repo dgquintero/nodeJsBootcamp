@@ -22,11 +22,14 @@ const generarHTML = ()=> {
 }
 
 exports.enviar = async () => {
-  let info = transport.sendMail({
+  let info = {
     from: '"UpTask" <no-reply@uptask.com>', // sender address
     to: "correo@correo.com", // list of receivers
     subject: "Password Reset", // Subject line
     text: "Hello world?", // plain text body
     html: generarHTML() // html body
-  });
+  };
+
+  const enviarEmail = util.promisify(transport.sendMail, transport)
+  return enviarEmail.call(transport, info)
 }
