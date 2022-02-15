@@ -16,18 +16,20 @@ var transport = nodemailer.createTransport({
 });
 
 // generar HMTL
-const generarHTML = ()=> {
-  const html = pug.renderFile(`${__dirname}/../views/emails/reestablecer-password.pug`)
+const generarHTML = (archivo, opciones = {})=> {
+  const html = pug.renderFile(`${__dirname}/../views/emails/${archivo}.pug`, opciones)
   return juice(html)
 }
 
-exports.enviar = async () => {
+exports.enviar = async (opciones) => {
+  const html = generarHTML(opciones.archivo, opciones)
+  const text= htmlToText.compile(html)
   let info = {
     from: '"UpTask" <no-reply@uptask.com>', // sender address
-    to: "correo@correo.com", // list of receivers
-    subject: "Password Reset", // Subject line
-    text: "Hello world?", // plain text body
-    html: generarHTML() // html body
+    to: opciones.usuario.email, // list of receivers
+    subject: opciones.subject, // Subject line
+    text,
+    html  // html body
   };
 
   const enviarEmail = util.promisify(transport.sendMail, transport)
