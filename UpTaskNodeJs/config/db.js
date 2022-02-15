@@ -13,7 +13,6 @@ const db = new Sequelize(
       host: process.env.BD_HOST,
       dialect: 'mysql',
       port: process.env.BD_PORT,
-      operatorsAliases: false,
       define: {
           // The `timestamps` field specify whether or not the `createdAt` and `updatedAt` fields will be created.
           // This was true by default, but now is false by default
